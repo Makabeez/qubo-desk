@@ -1,0 +1,17 @@
+out/
+cache/
+broadcast/
+solver/target/
+__pycache__/
+.pytest_cache/
+.env
+*-state.json
+bot*.json
+demo-*.json
+job*.json
+book*.json
+*.mtx
+*.mtx.gz
+.venv/
+.env.bak
+!examples/*.json

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="1200" height="240" role="img" aria-label="QuboDesk — useful-work jobs for traders on QMS">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c091a"/><stop offset="1" stop-color="#1b1236"/></linearGradient>
+<linearGradient id="ink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b9a7ff"/><stop offset="1" stop-color="#6ee7f9"/></linearGradient>
+<style>
+.b{fill:#2a2150;animation:flip 4s steps(1) infinite}
+.win{animation-name:settle}
+@keyframes flip{0%{fill:#2a2150}30%{fill:#7c6cf0}55%{fill:#2a2150}80%{fill:#4b3fa6}}
+@keyframes settle{0%{fill:#2a2150}25%{fill:#7c6cf0}50%,100%{fill:#6ee7f9}}
+.scan{animation:scan 4s linear infinite}
+@keyframes scan{from{transform:translateX(0)}to{transform:translateX(480px)}}
+.t{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.e{animation:fade 4s ease-in-out infinite}
+@keyframes fade{0%,40%{opacity:0}60%,100%{opacity:1}}
+</style>
+</defs>
+<rect width="1200" height="240" fill="url(#bg)"/>
+<text x="60" y="108" class="t" font-size="56" font-weight="700" fill="url(#ink)">QuboDesk</text>
+<text x="62" y="146" class="t" font-size="18" fill="#cfc6ff">useful-work jobs for traders</text>
+<text x="62" y="174" class="t" font-size="14" fill="#8f86c4">portfolio → QUBO → QMS PoUW market → book</text>
+<rect class="b win" x="640" y="58" width="18" height="18" rx="4" style="animation-delay:-0.94s"/>
+<rect class="b win" x="670" y="58" width="18" height="18" rx="4" style="animation-delay:-1.58s"/>
+<rect class="b" x="700" y="58" width="18" height="18" rx="4" style="animation-delay:-0.27s"/>
+<rect class="b" x="730" y="58" width="18" height="18" rx="4" style="animation-delay:-3.67s"/>
+<rect class="b win" x="760" y="58" width="18" height="18" rx="4" style="animation-delay:-3.06s"/>
+<rect class="b win" x="790" y="58" width="18" height="18" rx="4" style="animation-delay:-2.15s"/>
+<rect class="b win" x="820" y="58" width="18" height="18" rx="4" style="animation-delay:-0.69s"/>
+<rect class="b" x="850" y="58" width="18" height="18" rx="4" style="animation-delay:-0.86s"/>
+<rect class="b" x="880" y="58" width="18" height="18" rx="4" style="animation-delay:-3.32s"/>
+<rect class="b win" x="910" y="58" width="18" height="18" rx="4" style="animation-delay:-3.2s"/>
+<rect class="b" x="940" y="58" width="18" height="18" rx="4" style="animation-delay:-1.24s"/>
+<rect class="b" x="970" y="58" width="18" height="18" rx="4" style="animation-delay:-2.93s"/>
+<rect class="b win" x="1000" y="58" width="18" height="18" rx="4" style="animation-delay:-3.52s"/>
+<rect class="b" x="1030" y="58" width="18" height="18" rx="4" style="animation-delay:-2.42s"/>
+<rect class="b win" x="1060" y="58" width="18" height="18" rx="4" style="animation-delay:-2.02s"/>
+<rect class="b win" x="1090" y="58" width="18" height="18" rx="4" style="animation-delay:-1.89s"/>
+<rect class="b" x="640" y="88" width="18" height="18" rx="4" style="animation-delay:-3.74s"/>
+<rect class="b win" x="670" y="88" width="18" height="18" rx="4" style="animation-delay:-2.19s"/>
+<rect class="b" x="700" y="88" width="18" height="18" rx="4" style="animation-delay:-3.64s"/>
+<rect class="b" x="730" y="88" width="18" height="18" rx="4" style="animation-delay:-3.53s"/>
+<rect class="b" x="760" y="88" width="18" height="18" rx="4" style="animation-delay:-2.03s"/>
+<rect class="b" x="790" y="88" width="18" height="18" rx="4" style="animation-delay:-2.4s"/>
+<rect class="b win" x="820" y="88" width="18" height="18" rx="4" style="animation-delay:-0.65s"/>
+<rect class="b win" x="850" y="88" width="18" height="18" rx="4" style="animation-delay:-3.25s"/>
+<rect class="b" x="880" y="88" width="18" height="18" rx="4" style="animation-delay:-0.19s"/>
+<rect class="b" x="910" y="88" width="18" height="18" rx="4" style="animation-delay:-1.12s"/>
+<rect class="b win" x="940" y="88" width="18" height="18" rx="4" style="animation-delay:-1.88s"/>
+<rect class="b win" x="970" y="88" width="18" height="18" rx="4" style="animation-delay:-3.99s"/>
+<rect class="b win" x="1000" y="88" width="18" height="18" rx="4" style="animation-delay:-1.65s"/>
+<rect class="b win" x="1030" y="88" width="18" height="18" rx="4" style="animation-delay:-2.53s"/>
+<rect class="b" x="1060" y="88" width="18" height="18" rx="4" style="animation-delay:-1.42s"/>
+<rect class="b" x="1090" y="88" width="18" height="18" rx="4" style="animation-delay:-1.28s"/>
+<rect class="b win" x="640" y="118" width="18" height="18" rx="4" style="animation-delay:-3.62s"/>
+<rect class="b win" x="670" y="118" width="18" height="18" rx="4" style="animation-delay:-0.25s"/>
+<rect class="b" x="700" y="118" width="18" height="18" rx="4" style="animation-delay:-3.06s"/>
+<rect class="b win" x="730" y="118" width="18" height="18" rx="4" style="animation-delay:-0.95s"/>
+<rect class="b" x="760" y="118" width="18" height="18" rx="4" style="animation-delay:-0.71s"/>
+<rect class="b" x="790" y="118" width="18" height="18" rx="4" style="animation-delay:-0.17s"/>
+<rect class="b" x="820" y="118" width="18" height="18" rx="4" style="animation-delay:-3.58s"/>
+<rect class="b" x="850" y="118" width="18" height="18" rx="4" style="animation-delay:-2.94s"/>
+<rect class="b win" x="880" y="118" width="18" height="18" rx="4" style="animation-delay:-0.07s"/>
+<rect class="b" x="910" y="118" width="18" height="18" rx="4" style="animation-delay:-3.86s"/>
+<rect class="b" x="940" y="118" width="18" height="18" rx="4" style="animation-delay:-1.64s"/>
+<rect class="b" x="970" y="118" width="18" height="18" rx="4" style="animation-delay:-2.48s"/>
+<rect class="b win" x="1000" y="118" width="18" height="18" rx="4" style="animation-delay:-1.17s"/>
+<rect class="b win" x="1030" y="118" width="18" height="18" rx="4" style="animation-delay:-1.78s"/>
+<rect class="b" x="1060" y="118" width="18" height="18" rx="4" style="animation-delay:-1.53s"/>
+<rect class="b win" x="1090" y="118" width="18" height="18" rx="4" style="animation-delay:-1.33s"/>
+<rect class="b win" x="640" y="148" width="18" height="18" rx="4" style="animation-delay:-0.18s"/>
+<rect class="b" x="670" y="148" width="18" height="18" rx="4" style="animation-delay:-3.13s"/>
+<rect class="b win" x="700" y="148" width="18" height="18" rx="4" style="animation-delay:-1.16s"/>
+<rect class="b" x="730" y="148" width="18" height="18" rx="4" style="animation-delay:-3.93s"/>
+<rect class="b win" x="760" y="148" width="18" height="18" rx="4" style="animation-delay:-0.83s"/>
+<rect class="b win" x="790" y="148" width="18" height="18" rx="4" style="animation-delay:-0.22s"/>
+<rect class="b win" x="820" y="148" width="18" height="18" rx="4" style="animation-delay:-2.71s"/>
+<rect class="b" x="850" y="148" width="18" height="18" rx="4" style="animation-delay:-0.16s"/>
+<rect class="b" x="880" y="148" width="18" height="18" rx="4" style="animation-delay:-1.0s"/>
+<rect class="b" x="910" y="148" width="18" height="18" rx="4" style="animation-delay:-0.49s"/>
+<rect class="b" x="940" y="148" width="18" height="18" rx="4" style="animation-delay:-3.1s"/>
+<rect class="b" x="970" y="148" width="18" height="18" rx="4" style="animation-delay:-3.95s"/>
+<rect class="b" x="1000" y="148" width="18" height="18" rx="4" style="animation-delay:-0.97s"/>
+<rect class="b" x="1030" y="148" width="18" height="18" rx="4" style="animation-delay:-0.15s"/>
+<rect class="b" x="1060" y="148" width="18" height="18" rx="4" style="animation-delay:-0.99s"/>
+<rect class="b" x="1090" y="148" width="18" height="18" rx="4" style="animation-delay:-3.32s"/>
+<rect class="scan" x="632" y="50" width="4" height="124" rx="2" fill="#6ee7f9" opacity="0.55"/>
+<text x="640" y="206" class="t e" font-size="14" fill="#6ee7f9">E(x) = x<tspan baseline-shift="super" font-size="10">T</tspan>Qx  verified on-chain  ✓</text>
+</svg>

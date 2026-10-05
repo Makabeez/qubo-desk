@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: contracts
+        run: forge test -vv
+      - name: solver
+        run: cargo build --release --manifest-path solver/Cargo.toml
+      - name: python
+        run: |
+          pip install -r requirements.txt
+          python -m pytest -q tests
+      - name: end-to-end (anvil)
+        run: ./scripts/demo_local.sh
+      - name: end-to-end tie race (anvil)
+        run: TIE=1 ./scripts/demo_local.sh

@@ -1,0 +1,5 @@
+web3>=7,<9
+numpy>=1.26
+pytest>=8
+# optional: python -m qubodesk.exec --hl-testnet
+# hyperliquid-python-sdk
