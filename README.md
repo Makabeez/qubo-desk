@@ -33,7 +33,16 @@
 | Settle | 52161 | [`0x284a…1229`](https://testnet.qmsscan.io/tx/0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229) | beat the bar by 12 938 → solver credited 0.5 QMS |
 | Withdraw | — | [`0x159c…d50a`](https://testnet.qmsscan.io/tx/0x159c1f1a5c3ed7473bef94d663892a47356ac65d4e0c8dba83c6f820df7cd50a) | pull payment |
 
-For scale on the same instance: greedy top-8 scored E −4472567 at carry/√risk **2.20**; a 2-second local solve reached E −4484918 at carry/√risk **4.55**. The on-chain winner is lower-energy still (E −4485505). Decode its legs yourself — the script checks the instance bytes against the on-chain hash first:
+**The winning book**, decoded from the on-chain bitstring:
+
+| | Legs (all short-perp) | Carry Σ | Risk | Carry/√risk |
+|---|---|---|---|---|
+| Greedy top-8 by carry | WLD ZRO PONS XPL MON NIL XMR FET | 211.4 % APR | 0.926 | 2.20 |
+| **QuboDesk winner (on-chain)** | PUMP ZRO PONS XPL ONDO MON VVV FET | 187.3 % APR | **0.209** | **4.09** |
+
+It gives up 11 % of headline carry to cut carry instability by 77 %. It does this by swapping WLD, NIL and XMR for PUMP, ONDO and VVV: legs with lower carry, but whose daily funding moves less in step with the rest of the book over the 14-day window. The market pays on the client's objective, E = −carry + λ·risk with λ = 1, not on the ratio. A 2-second local solve found a book with a higher ratio (4.55) but a worse E, so it would have lost this job. The client's λ defines "best", and the contract enforces it.
+
+Reproduce it — `book` refuses to decode unless the job file's bytes hash to the instance posted on-chain:
 
 ```bash
 python -m qubodesk book 0 examples/job-0.json
