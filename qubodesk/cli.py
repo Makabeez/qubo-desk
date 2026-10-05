@@ -118,7 +118,7 @@ def cmd_jobs(a):
         phase = ("settled" if j["settled"] else "commit" if head <= j["commitEnd"]
                  else "reveal" if head <= j["revealEnd"] else "settleable")
         best = ("-" if j["bestSolver"] == "0x" + "0" * 40
-                else f"{j['bestEnergy']} by {j['bestSolver'][:10]}… (commit #{j['bestCommitBlock']})")
+                else f"{j['bestEnergy']} by {j['bestSolver']} (commit #{j['bestCommitBlock']})")
         print(f"  #{jid:<4} n={j['n']:<4} fee {Web3.from_wei(j['fee'], 'ether'):<8} {phase:<10} best {best}")
 
 

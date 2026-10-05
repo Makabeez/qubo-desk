@@ -4,7 +4,7 @@
 
 **A reference trading client for the QMS useful-work marketplace — post a portfolio problem, let PoUW solvers compete, verify the winner on-chain.**
 
-[![Contract](https://img.shields.io/badge/QMS_Testnet-0x3865…b0b9_verified-6ee7f9?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
+[![Contract](https://img.shields.io/badge/QMS_Testnet-contract_verified-6ee7f9?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
 [![Job 0](https://img.shields.io/badge/Job_0-settled_on--chain-7c6cf0?style=for-the-badge)](https://testnet.qmsscan.io/tx/0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229)
 [![Built on QMS](https://img.shields.io/badge/Built_on-QMS_Network-7c6cf0?style=for-the-badge)](https://qms.finance)
 [![License](https://img.shields.io/badge/License-MIT-b9a7ff?style=for-the-badge)](LICENSE)
@@ -27,11 +27,11 @@
 
 | Step | Block | Tx | What happened |
 |---|---|---|---|
-| Post | — | [`0x759a…2d57`](https://testnet.qmsscan.io/tx/0x759ae4960f06e857f6c57fbc0f43f3308ffddb7bbad028eb5a20cd9343752d57) | 528-term QUBO emitted on-chain, 0.5 QMS locked, bar E ≤ −4472568 |
-| Commit | 52104 | [`0xeb9b…f162`](https://testnet.qmsscan.io/tx/0xeb9b51722bae6af0d8fb9f62f23627d091f18fbcf5943dc4b5194f720c5ef162) | solver bot solved in 20 s (230k SA restarts), committed `keccak(job, solver, x, salt)` |
-| Reveal | 52129 | [`0x0bbc…5e18`](https://testnet.qmsscan.io/tx/0x0bbca45dc83c39fb887063023e1398115426a889c5b04f0056c3acda7de15e18) | contract recomputed `xᵀQx` = **−4485505** for x = `0x83384040` (8 legs) |
-| Settle | 52161 | [`0x284a…1229`](https://testnet.qmsscan.io/tx/0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229) | beat the bar by 12 938 → solver credited 0.5 QMS |
-| Withdraw | — | [`0x159c…d50a`](https://testnet.qmsscan.io/tx/0x159c1f1a5c3ed7473bef94d663892a47356ac65d4e0c8dba83c6f820df7cd50a) | pull payment |
+| Post | — | [`0x759ae4960f06e857f6c57fbc0f43f3308ffddb7bbad028eb5a20cd9343752d57`](https://testnet.qmsscan.io/tx/0x759ae4960f06e857f6c57fbc0f43f3308ffddb7bbad028eb5a20cd9343752d57) | 528-term QUBO emitted on-chain, 0.5 QMS locked, bar E ≤ −4472568 |
+| Commit | 52104 | [`0xeb9b51722bae6af0d8fb9f62f23627d091f18fbcf5943dc4b5194f720c5ef162`](https://testnet.qmsscan.io/tx/0xeb9b51722bae6af0d8fb9f62f23627d091f18fbcf5943dc4b5194f720c5ef162) | solver bot solved in 20 s (230k SA restarts), committed `keccak(job, solver, x, salt)` |
+| Reveal | 52129 | [`0x0bbca45dc83c39fb887063023e1398115426a889c5b04f0056c3acda7de15e18`](https://testnet.qmsscan.io/tx/0x0bbca45dc83c39fb887063023e1398115426a889c5b04f0056c3acda7de15e18) | contract recomputed `xᵀQx` = **−4485505** for x = `0x83384040` (8 legs) |
+| Settle | 52161 | [`0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229`](https://testnet.qmsscan.io/tx/0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229) | beat the bar by 12 938 → solver credited 0.5 QMS |
+| Withdraw | — | [`0x159c1f1a5c3ed7473bef94d663892a47356ac65d4e0c8dba83c6f820df7cd50a`](https://testnet.qmsscan.io/tx/0x159c1f1a5c3ed7473bef94d663892a47356ac65d4e0c8dba83c6f820df7cd50a) | pull payment |
 
 **The winning book**, decoded from the on-chain bitstring:
 
