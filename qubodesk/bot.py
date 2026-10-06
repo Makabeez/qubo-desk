@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import secrets
+import sys
 import time
 from pathlib import Path
 
@@ -169,7 +170,8 @@ def main(argv=None) -> None:
     ap.add_argument("--env-file", help="per-solver key file (e.g. .env.solver1); overrides PRIVATE_KEY from "
                                        "the shell and from .env, shared settings still come from .env")
     a = ap.parse_args(argv)
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    # stdout, so PM2 files normal activity under -out.log and only real crashes land in -error.log
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", stream=sys.stdout)
     if a.env_file:
         load_env(a.env_file, override=True)
     # Under PM2 the bot may start before the market is deployed or while the RPC is down. Exiting would

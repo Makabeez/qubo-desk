@@ -5,7 +5,7 @@
 **A reference trading client for the QMS useful-work marketplace — post a portfolio problem, let PoUW solvers compete, verify the winner on-chain.**
 
 [![Contract](https://img.shields.io/badge/QMS_Testnet-contract_verified-6ee7f9?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
-[![Job 0](https://img.shields.io/badge/Job_0-settled_on--chain-7c6cf0?style=for-the-badge)](https://testnet.qmsscan.io/tx/0x284ab204b16c7ad6f7b10c72a5497074b34bc9db7958d393b0112b464e661229)
+[![Jobs](https://img.shields.io/badge/Jobs-2_settled_on--chain-7c6cf0?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
 [![Built on QMS](https://img.shields.io/badge/Built_on-QMS_Network-7c6cf0?style=for-the-badge)](https://qms.finance)
 [![License](https://img.shields.io/badge/License-MIT-b9a7ff?style=for-the-badge)](LICENSE)
 
@@ -22,6 +22,37 @@
 ## Live on QMS testnet
 
 `QuboMarket` is deployed and source-verified at [`0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9`](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9) (chain 19480, block 52068).
+
+**Job 1: two independent solvers compete.** The instance is the top-48 Hyperliquid perps, pick 10 legs, 1 QMS fee, paid only for strictly beating greedy. The client and both solvers are three different wallets. The solvers run different compute budgets: 25 s for solver1, 6 s for solver2.
+
+| Wallet | Role | Address |
+|---|---|---|
+| client | posts and pays | [`0xc72d2708C1A6Cd11E3167839c7576f1f402c3104`](https://testnet.qmsscan.io/address/0xc72d2708C1A6Cd11E3167839c7576f1f402c3104) |
+| solver1 | 25 s budget | [`0xA6dBF47efd84Badc6EB6Df8005cECD8BDcF7cECD`](https://testnet.qmsscan.io/address/0xA6dBF47efd84Badc6EB6Df8005cECD8BDcF7cECD) |
+| solver2 | 6 s budget | [`0xA083b04A0fE1AADc73892A7Dd1709035B05ECA0D`](https://testnet.qmsscan.io/address/0xA083b04A0fE1AADc73892A7Dd1709035B05ECA0D) |
+
+| Step | Who | Block | Tx | What happened |
+|---|---|---|---|---|
+| Post | client | 55610 | [`0x33d185dcbb1bc8360f97af1337581b9b906f13719e5e2f42f780a6ac1402245c`](https://testnet.qmsscan.io/tx/0x33d185dcbb1bc8360f97af1337581b9b906f13719e5e2f42f780a6ac1402245c) | 1176-term QUBO on-chain, 1 QMS locked, bar E ≤ −5509964 |
+| Commit | solver2 | 55615 | [`0xb11b2bdc1585990ba6b171165749115b2cf657c5cb593c4d7e5347513d0e902e`](https://testnet.qmsscan.io/tx/0xb11b2bdc1585990ba6b171165749115b2cf657c5cb593c4d7e5347513d0e902e) | 6 s solve, E −5519055, **committed first** |
+| Commit | solver1 | 55617 | [`0x61b19fb91cd0b6da590d437ab1ffb343b9fe76c3beb2c7ee244df5e68bcd6dc1`](https://testnet.qmsscan.io/tx/0x61b19fb91cd0b6da590d437ab1ffb343b9fe76c3beb2c7ee244df5e68bcd6dc1) | 25 s solve, E −5519072 |
+| Reveal | solver2 | 55642 | [`0x60f2d7a692938226720bfd2b4b4bff7368c009584813f3ad8e20083dbe60abd5`](https://testnet.qmsscan.io/tx/0x60f2d7a692938226720bfd2b4b4bff7368c009584813f3ad8e20083dbe60abd5) | contract verifies x = `0x408009290490` (10 legs), E −5519055 → current best |
+| Reveal | solver1 | 55642 | [`0xe34f896feda316e988e33e3fa1f0e18eb4e5eb2d3507499ce7f909238c2beda1`](https://testnet.qmsscan.io/tx/0xe34f896feda316e988e33e3fa1f0e18eb4e5eb2d3507499ce7f909238c2beda1) | same block; x = `0x8101290c82` (10 legs), E −5519072 is **strictly lower** → takes the job |
+| Settle | solver1 | — | [`0x135ff6c70fed6cce70123a78ccae272ce6ebc9a3322459dbbff1b6bee06e7a35`](https://testnet.qmsscan.io/tx/0x135ff6c70fed6cce70123a78ccae272ce6ebc9a3322459dbbff1b6bee06e7a35) | 1 QMS credited to solver1 |
+| Withdraw | solver1 | — | [`0xca172946660692460bb1fdc33dbaef8a98a743bc9b6ba902b83a05b9a2a4a418`](https://testnet.qmsscan.io/tx/0xca172946660692460bb1fdc33dbaef8a98a743bc9b6ba902b83a05b9a2a4a418) | pull payment |
+
+Committing first didn't save solver2: a strictly better answer always wins, and commit order only breaks exact ties. Solver2's whole cost of competing and losing was about 0.00003 QMS in gas.
+
+| Job 1 | Legs | Carry Σ | Risk | Carry/√risk |
+|---|---|---|---|---|
+| Greedy top-10 by carry | ZRO WLD MON PONS SKY NIL FET **SAND (long, 163 % APR)** GRASS CASHCAT | 417.2 % APR | 17.08 | 1.01 |
+| **Winner (solver1, on-chain)** | ETH PUMP ZRO LIT FARTCOIN MON VVV PONS NIL GRASS | 221.4 % APR | **0.356** | **3.71** |
+
+Greedy chased a single funding spike (SAND), so most of its headline carry is one unstable leg. The winner keeps about half the carry with 2 % of the carry variance.
+
+```bash
+python -m qubodesk book 1 examples/job-1.json
+```
 
 **Job 0** — a real portfolio: top-32 Hyperliquid perps by volume, 14 days of hourly funding, pick 8 basis legs. The client only pays for a solution **strictly better** than greedy top-8-by-carry.
 
@@ -48,7 +79,7 @@ Reproduce it — `book` refuses to decode unless the job file's bytes hash to th
 python -m qubodesk book 0 examples/job-0.json
 ```
 
-> First job: the client and the solver are the same burner wallet. It proves the full loop end to end; it isn't a demand signal.
+> Job 0's client and solver are the same burner wallet; it proved the loop end to end. Job 1 separates the client from two competing solvers. Every wallet here is a testnet burner run by the author, so neither job is a demand signal.
 
 ## Why
 
