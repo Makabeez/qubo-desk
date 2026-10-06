@@ -23,15 +23,35 @@ class MarketNotConfigured(SystemExit):
     """Raised when .env has no MARKET_ADDRESS yet. A SystemExit so CLI users get a clean message."""
 
 
-def load_env(path: str | None = None) -> None:
-    p = Path(path) if path else ROOT / ".env"
+def read_env(path: str | Path) -> dict[str, str]:
+    p = Path(path)
+    if not p.is_absolute() and not p.exists():
+        p = ROOT / p
     if not p.exists():
-        return
+        raise FileNotFoundError(str(p))
+    out = {}
     for line in p.read_text().splitlines():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+            out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
+def load_env(path: str | None = None, override: bool = False) -> None:
+    """Default: fill missing vars from ROOT/.env. override=True: the file wins over the process env
+    (used for per-solver key files, so an exported PRIVATE_KEY in the shell can never leak in)."""
+    try:
+        values = read_env(path or ROOT / ".env")
+    except FileNotFoundError:
+        if path:
+            raise
+        return
+    for k, v in values.items():
+        if override:
+            os.environ[k] = v
+        else:
+            os.environ.setdefault(k, v)
 
 
 class Chain:

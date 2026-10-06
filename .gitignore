@@ -5,6 +5,9 @@ solver/target/
 __pycache__/
 .pytest_cache/
 .env
+.env.*
+!.env.example
+solver*-state.json
 *-state.json
 bot*.json
 demo-*.json

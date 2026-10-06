@@ -94,3 +94,37 @@ def test_mtx_conventions(tmp_path):
     assert mtx.energy(full, 0b011) == -1 - 1 + 6
     text = mtx.to_solver_text(n, full)
     assert text.splitlines()[0] == "3 4"
+
+
+def test_env_file_override_beats_shell_and_dotenv(tmp_path, monkeypatch):
+    from qubodesk import chain
+    (tmp_path / ".env").write_text("PRIVATE_KEY=0xclient\r\nMARKET_ADDRESS=0xmarket\r\n")
+    (tmp_path / ".env.solver1").write_text("PRIVATE_KEY=0xsolver1\n")
+    monkeypatch.setattr(chain, "ROOT", tmp_path)
+    monkeypatch.setenv("PRIVATE_KEY", "0xexported-in-shell")
+    monkeypatch.delenv("MARKET_ADDRESS", raising=False)
+    chain.load_env(str(tmp_path / ".env.solver1"), override=True)
+    chain.load_env()  # what Chain() does next
+    import os
+    assert os.environ["PRIVATE_KEY"] == "0xsolver1"
+    assert os.environ["MARKET_ADDRESS"] == "0xmarket"
+
+
+def test_wallet_new_writes_private_file_and_never_prints_key(tmp_path, monkeypatch, capsys):
+    import os
+    import stat
+
+    from qubodesk import chain, wallets
+    monkeypatch.setattr(chain, "ROOT", tmp_path)
+    monkeypatch.setattr(wallets, "ROOT", tmp_path)
+    wallets.main(["new", "solver1"])
+    out = capsys.readouterr().out
+    f = tmp_path / ".env.solver1"
+    key = chain.read_env(f)["PRIVATE_KEY"]
+    assert key.startswith("0x") and len(key) == 66
+    assert key[2:] not in out and key not in out
+    assert stat.S_IMODE(os.stat(f).st_mode) == 0o600
+    with pytest.raises(SystemExit):
+        wallets.main(["new", "solver1"])  # never overwrite a key
+    with pytest.raises(SystemExit):
+        wallets.main(["new", "../evil"])

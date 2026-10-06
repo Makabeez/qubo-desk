@@ -202,6 +202,21 @@ pm2 start ecosystem.config.js && pm2 save
 python -m qubodesk book 0 job.json && python -m qubodesk.exec book.json            # dry run
 ```
 
+### Independent solver wallets
+
+A client paying itself proves the plumbing, not the market. Create burner solver wallets funded from the main `.env` wallet. Each key goes to its own `.env.<name>` file (mode 600, gitignored) and is never printed:
+
+```bash
+python -m qubodesk.wallets new solver1 --fund 3
+python -m qubodesk.wallets new solver2 --fund 3
+python -m qubodesk.wallets list                     # addresses + balances, flags duplicate keys
+
+pm2 stop qubodesk-solver                            # the client must not solve its own job
+pm2 start ecosystem.config.js --only qubodesk-solver-1,qubodesk-solver-2 && pm2 save
+```
+
+`--env-file` overrides `PRIVATE_KEY` even if one is exported in the shell, so a solver can never run with the client's key by accident. The two PM2 solvers get different compute budgets (25 s vs 6 s) and really compete.
+
 `exec.py --hl-testnet` places the **perp legs only** on Hyperliquid testnet (needs `hyperliquid-python-sdk`). On its own a perp leg is directional — it's a plumbing demo, and mainnet is deliberately unsupported.
 
 ### Benchmark against the chain's own miners

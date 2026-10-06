@@ -15,7 +15,7 @@ from pathlib import Path
 
 from web3 import Web3
 
-from .chain import Chain, MarketNotConfigured
+from .chain import Chain, MarketNotConfigured, load_env
 from .qubo import Qubo
 from .solver import solve
 
@@ -166,8 +166,12 @@ def main(argv=None) -> None:
     ap.add_argument("--margin", type=int, default=2, help="blocks of slack before commitEnd")
     ap.add_argument("--poll", type=float, default=5.0)
     ap.add_argument("--until-idle", action="store_true", help="exit once no job is in flight (demos/tests)")
+    ap.add_argument("--env-file", help="per-solver key file (e.g. .env.solver1); overrides PRIVATE_KEY from "
+                                       "the shell and from .env, shared settings still come from .env")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    if a.env_file:
+        load_env(a.env_file, override=True)
     # Under PM2 the bot may start before the market is deployed or while the RPC is down. Exiting would
     # make PM2 restart-loop it, so wait here and re-read .env until a market is reachable.
     while True:
