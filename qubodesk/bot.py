@@ -189,7 +189,12 @@ def main(argv=None) -> None:
     log.info("solver %s on chain %d, market %s", bot.c.me, bot.c.chain_id, bot.c.market.address)
     seen_job = False
     while True:
-        bot.tick()
+        import requests as _rq, time as _t
+        try:
+            bot.tick()
+        except (_rq.exceptions.RequestException, OSError) as e:
+            print(f'transient RPC error, retrying in 10s: {e!r}', flush=True)
+            _t.sleep(10)
         seen_job |= bool(bot.s["jobs"])
         if a.until_idle and seen_job and not bot.active():
             log.info("idle — exiting")
