@@ -262,7 +262,10 @@ python -m qubodesk bench block-123.mtx.gz --convention upper --block-x 0x… --b
 ## Scope and roadmap
 
 - **Today:** client-side reference market on QMS testnet, settled in native QMS. Solvers run *outside* consensus.
-- **When QMS v2 ships its marketplace:** keep the encoder, bot and executor; swap `QuboMarket` for the canonical contract. Happy to align with an interface spec.
+- **How it maps to QMS:** in the protocol's marketplace, solutions come from miners as part of block production, and the client reward is their second revenue stream (confirmed by the QMS CTO). QuboDesk's solver bots are a stand-in for that until mining opens. The durable part is the client side: encoding a trading problem into a QUBO, posting it with a reward and a quality bar, verifying the result, and decoding it back into a book.
+- **Next testnet (early Dec 2026):** the chain resets; `QuboMarket` and both jobs get redeployed and re-run.
+- **When QMS v2 ships its marketplace:** keep the encoder and executor; swap `QuboMarket` for the canonical contract and post jobs in its format. Happy to align with an interface spec.
+- **When mining opens:** run a QMS miner with the `qsa` solver core.
 - **Not done here:** a hedged executor (spot/other-venue leg), problem classes beyond QUBO, partial payouts across ranked solutions.
 
 ## Attribution

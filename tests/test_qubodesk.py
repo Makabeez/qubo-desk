@@ -55,6 +55,7 @@ def test_every_one_flip_local_min_is_feasible(seed):
             assert len(bits(x, q.n)) == 4
 
 
+@pytest.mark.skipif(qsa_path() is None, reason="needs the Rust qsa solver (cargo build --release in solver/)")
 @pytest.mark.parametrize("seed", range(4))
 def test_solver_hits_exact_optimum_small(seed):
     u = synthetic_universe(16, seed=seed)
