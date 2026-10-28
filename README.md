@@ -5,7 +5,7 @@
 **A reference trading client for the QMS useful-work marketplace — post a portfolio problem, let PoUW solvers compete, verify the winner on-chain.**
 
 [![Contract](https://img.shields.io/badge/QMS_Testnet-contract_verified-6ee7f9?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
-[![Jobs](https://img.shields.io/badge/Jobs-2_settled_on--chain-7c6cf0?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
+[![Jobs](https://img.shields.io/badge/Jobs-3_settled_on--chain-7c6cf0?style=for-the-badge)](https://testnet.qmsscan.io/address/0x3865C6d9A678b74E7bBDA6d3Ad862B864C7eb0b9)
 [![Built on QMS](https://img.shields.io/badge/Built_on-QMS_Network-7c6cf0?style=for-the-badge)](https://qms.finance)
 [![License](https://img.shields.io/badge/License-MIT-b9a7ff?style=for-the-badge)](LICENSE)
 
@@ -54,6 +54,16 @@ Greedy chased a single funding spike (SAND), so most of its headline carry is on
 python -m qubodesk book 1 examples/job-1.json
 ```
 
+**Job 2: posted by an outside wallet.** About 16 hours after QuboDesk was announced, a wallet the author does not control posted its own 32-variable instance (different from job 0's), 0.01 QMS, accepting any solution. Both solver bots picked it up and found the **same** optimum, so the contract's tie-break decided it: the earlier commit wins.
+
+| Step | Who | Block | Tx | What happened |
+|---|---|---|---|---|
+| Post | outside client [`0x59d83D811A292fd184f67f9ecDbbD002fE0b5799`](https://testnet.qmsscan.io/address/0x59d83D811A292fd184f67f9ecDbbD002fE0b5799) | 56445 | [`0x0da26c50e77805c4b6cd43fc6af69372af0be2f9a2a978c92072d169edcf3ccd`](https://testnet.qmsscan.io/tx/0x0da26c50e77805c4b6cd43fc6af69372af0be2f9a2a978c92072d169edcf3ccd) | n = 32, 0.01 QMS locked |
+| Commit | solver2 | 56451 | [`0xa7b38de044e09deff301c9fba131249b903a6b900ec61671d9919314f82bac81`](https://testnet.qmsscan.io/tx/0xa7b38de044e09deff301c9fba131249b903a6b900ec61671d9919314f82bac81) | committed first |
+| Commit | solver1 | 56452 | [`0x1316b78c272df575e40e5a6af711904f2bc81d93dde95dcabc788f5a2fe0b8ef`](https://testnet.qmsscan.io/tx/0x1316b78c272df575e40e5a6af711904f2bc81d93dde95dcabc788f5a2fe0b8ef) | one block later |
+| Reveal | both | 56477 | [`0x3986bc14…`](https://testnet.qmsscan.io/tx/0x3986bc143a5bf70eaf691b8dfce627e026e9606e393dd25c41a5e9bf09fc1784) · [`0x5f92d617…`](https://testnet.qmsscan.io/tx/0x5f92d617373d6eac6f3fd1cb18d42488cb0be39a374293abebf74e9d1b0bc541) | identical x = `805328020`, E −4474131 → tie, solver2 keeps the job |
+| Settle | solver2 | 56508 | [`0x472207b15c233dfaa5569b8f2ab0a4a5f8dca71dcdc49677993b61eae23b6236`](https://testnet.qmsscan.io/tx/0x472207b15c233dfaa5569b8f2ab0a4a5f8dca71dcdc49677993b61eae23b6236) | 0.01 QMS credited, withdrawn in block 56509 |
+
 **Job 0** — a real portfolio: top-32 Hyperliquid perps by volume, 14 days of hourly funding, pick 8 basis legs. The client only pays for a solution **strictly better** than greedy top-8-by-carry.
 
 | Step | Block | Tx | What happened |
@@ -79,7 +89,7 @@ Reproduce it — `book` refuses to decode unless the job file's bytes hash to th
 python -m qubodesk book 0 examples/job-0.json
 ```
 
-> Job 0's client and solver are the same burner wallet; it proved the loop end to end. Job 1 separates the client from two competing solvers. Every wallet here is a testnet burner run by the author, so neither job is a demand signal.
+> Job 0's client and solver are the same burner wallet; it proved the loop end to end. Job 1 separates the client from two competing solvers. Both solvers in every job are burners run by the author. Jobs 0 and 1 were posted by the author too, so they are not a demand signal; job 2 is the one client the author does not control.
 
 ## Why
 
